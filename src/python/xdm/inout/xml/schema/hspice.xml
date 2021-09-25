@@ -294,37 +294,54 @@
             <model>
                 <prop type="name" label="name"/>
                 <prop type="value" label="modelType"/>
-                <param type="value" label="AF" labelKey="AF" value="1" />
-                <param type="value" label="BV" labelKey="BV" value="1e99" />
-                <param type="value" label="CJ" labelKey="CJ" value="0" />
-                <param type="value" label="CJ0" labelKey="CJ0" value="0" />
-                <param type="value" label="CJO" labelKey="CJO" value="0" />
-                <param type="value" label="EG" labelKey="EG" value="1.11" />
-                <param type="value" label="FC" labelKey="FC" value="0.5"/>
+                <!--DC-->
                 <param type="value" label="IBV" labelKey="IBV" value="0.001" />
-                <param type="value" label="IBVL" labelKey="IBVL" value="0" />
-                <param type="value" label="IKF" labelKey="IKF" value="0" />
-                <param type="value" label="IRF" labelKey="IRF" value="1" />
+                <param type="value" label="IB" labelKey="IBV" value="0.001" /> <!--hspice alias-->
                 <param type="value" label="IS" labelKey="IS" value="1e-14" />
-                <param type="value" label="ISR" labelKey="ISR" value="0" />
-                <param type="value" label="JS" labelKey="JS" value="1e-14" />
-                <param type="value" label="KF" labelKey="KF" value="0" />
-                <param type="value" label="M" labelKey="M" value="0.5" />
+                <param type="value" label="JS" labelKey="IS" value="1e-14" /> <!--hspice alias-->
                 <param type="value" label="N" labelKey="N" value="1" />
+                <param type="value" label="RS" labelKey="RS" value="0" />
+                <param type="value" label="VB" labelKey="VB" value="1e99" />
+                <param type="value" label="BV" labelKey="VB" value="1e99" /> <!--hspice alias-->
+                <param type="value" label="VAR" labelKey="VB" value="1e99" /> <!--hspice alias-->
+                <param type="value" label="VRB" labelKey="VB" value="1e99" /> <!--hspice alias-->
+
+                <param type="value" label="EG" labelKey="EG" value="1.11" />
+                <param type="value" label="XTI" labelKey="XTI" value="3" />
+                <!--level2(pspice)-->
+                <param type="value" label="IKF" labelKey="IKF" value="0" />
+                <param type="value" label="IK" labelKey="IKF" value="0" /> <!--hspice alias-->
+                <param type="value" label="JBF" labelKey="IKF" value="0" /> <!--hspice alias-->
+                <param type="value" label="IBVL" labelKey="IBVL" value="0" />
+                <param type="value" label="IRF" labelKey="IRF" value="1" />
+                <param type="value" label="ISR" labelKey="ISR" value="0" />
                 <param type="value" label="NBV" labelKey="NBV" value="1" />
                 <param type="value" label="NBVL" labelKey="NBVL" value="1" />
                 <param type="value" label="NR" labelKey="NR" value="2"/>
-                <param type="value" label="RS" labelKey="RS" value="0" />
                 <param type="value" label="TBV1" labelKey="TBV1" value="0" />
                 <param type="value" label="TBV2" labelKey="TBV2" value="0" />
                 <param type="value" label="TIKF" labelKey="TIKF" value="0" />
                 <param type="value" label="TNOM" labelKey="TNOM" value="amb" />
                 <param type="value" label="TRS1" labelKey="TRS1" value="0" />
                 <param type="value" label="TRS2" labelKey="TRS2" value="0" />
-                <param type="value" label="TT" labelKey="TT" value="0" />
-                <param type="value" label="VB" labelKey="VB" value="1e99" />
+                <!--Capacitance-->
+                <param type="value" label="CJ" labelKey="CJ" value="0" />
+                <param type="value" label="CJ0" labelKey="CJ" value="0" /> <!--hspice alias-->
+                <param type="value" label="CJO" labelKey="CJ" value="0" /> <!--hspice alias-->
+                <param type="value" label="CJA" labelKey="CJ" value="0" /> <!--hspice alias-->
+                <param type="value" label="FC" labelKey="FC" value="0.5"/>
+                <param type="value" label="M" labelKey="M" value="0.5" />
+                <param type="value" label="MJ" labelKey="M" value="0.5" /> <!--hspice alias-->
+                <param type="value" label="EXA" labelKey="M" value="0.5" /> <!--hspice alias-->
                 <param type="value" label="VJ" labelKey="VJ" value="1" />
-                <param type="value" label="XTI" labelKey="XTI" value="3" />
+                <param type="value" label="PB" labelKey="VJ" value="1"/> <!--hspice alias-->
+                <param type="value" label="PHI" labelKey="VJ" value="1" /> <!--hspice alias-->
+                <param type="value" label="PHA" labelKey="VJ" value="1" /> <!--hspice alias-->
+                <param type="value" label="TT" labelKey="TT" value="0" />
+                <!--Noise-->
+                <param type="value" label="AF" labelKey="AF" value="1" />
+                <param type="value" label="KF" labelKey="KF" value="0" />
+
 
                 <writer>
                     <token order="1" ref="string" value=".MODEL" />

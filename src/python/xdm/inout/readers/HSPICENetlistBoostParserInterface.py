@@ -93,6 +93,7 @@ class HSPICENetlistBoostParserInterface:
 
         # Comment out IF statements and any conditional block for it for now
         self._if_statement = False
+        self._false_if_statement = False
         self._comment_end_of_if_statement = False
         self._nested_if_statement_count = 0
 
@@ -138,16 +139,16 @@ class HSPICENetlistBoostParserInterface:
             self.convert_next_token(parsedObject, parsed_object_iter, pnl, self._synthesized_pnls, self._pkg_dict)
 
         # Hack for if statements - comment out line
-        if self._if_statement:
+        if self._if_statement and self._false_if_statement:
             pnl.type = "COMMENT"
             pnl.add_comment(boost_parsed_line.sourceline)
-            logging.warning("In file:\"" + str(os.path.basename(pnl.filename)) + "\" at line:" + str(pnl.linenum) + ". If statement cannot be translated. Continuing.")
+            logging.warning("In file:\"" + str(os.path.basename(pnl.filename)) + "\" at line:" + str(pnl.linenum) + ". If statement cannot be translated, assuming true!")
 
         if self._comment_end_of_if_statement:
             pnl.type = "COMMENT"
             pnl.add_comment(boost_parsed_line.sourceline)
             self._comment_end_of_if_statement = False
-            logging.warning("In file:\"" + str(os.path.basename(pnl.filename)) + "\" at line:" + str(pnl.linenum) + ". If statement cannot be translated. Continuing.")
+            logging.warning("In file:\"" + str(os.path.basename(pnl.filename)) + "\" at line:" + str(pnl.linenum) + ". If statement not translated, skipped false section.")
 
         if not silent:
             if boost_parsed_line.error_type == "critical":
@@ -265,12 +266,14 @@ class HSPICENetlistBoostParserInterface:
             pnl.type = "COMMENT"
             pnl.add_comment(parsed_object.value)
 
+            self._false_if_statement = True
 
         elif parsed_object.types[0] == SpiritCommon.data_model_type.DIRECTIVE_NAME and parsed_object.value.upper() == ".ELSE":
 
             pnl.type = "COMMENT"
             pnl.add_comment(parsed_object.value)
 
+            self._false_if_statement = True
 
         elif parsed_object.types[0] == SpiritCommon.data_model_type.DIRECTIVE_NAME and parsed_object.value.upper() == ".ENDIF":
 
@@ -280,6 +283,7 @@ class HSPICENetlistBoostParserInterface:
             self._nested_if_statement_count -= 1
             if self._nested_if_statement_count == 0:
                 self._if_statement = False
+                self._false_if_statement = False
                 self._comment_end_of_if_statement = True
 
 
