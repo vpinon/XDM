@@ -222,7 +222,9 @@ class NAME_SCOPE_INDEX(MasterIndex):
                 self.remove_statement(d)
             if self._lib_command is None:
                 if self.scope_contains("__MODELDEF__" + model_name):
-                    raise NameConflictException(model_name + " has already been used in this scope")
+                    #raise NameConflictException(model_name + " has already been used in this scope")
+                    logging.warning(model_name + " has already been used in this scope")
+                    return master
             else:
                 if self.local_scope_contains("__MODELDEF__" + model_name):
                     raise NameConflictException(model_name + " has already been used in this scope")
